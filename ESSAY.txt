@@ -1,0 +1,21 @@
+In the homework assignment, we are using character-based ngrams, i.e., the gram units are characters. Do you expect token-based ngram models to perform better?
+
+No, I don't expect token based ngram models to perform better, since with we have a small training set that does not for sure contain all possible words in a language( not even a fair percentage of them). So our model would end up wrongly classifying a lot of the sentences as other, since it would encounter a lot of out of vocab tokens. Also I believe token based ngrams would help when we need more context in our prediction, but in this case we dont't need to predict any following words in the sentence, only classify it in a language. This is done fairly well by char ngrams and I believe it would leade to worse performance if token ngrams were used.
+
+What do you think will happen if we provided more data for each category for you to build the language models? What if we only provided more data for Indonesian?
+
+Having more data for all categories would inprove performance, since we will decrease the possibility of wrongly predicting a sentence as "other", just because most of the ngrams were never seen before.
+
+Having more data only for Indonesiam for eg. might increase the accuracy for detecting Indonesian, but might also affect it in a negative way, since with an increased vocabulary just for indonesian, some of the ngrams will have a small probability (even though they are in Indonesian), and might be classified as some other language, even though they appear far less times in it, just because the total count for all other languages is a lot smaller (and dividing with a smaller number gives a higher probability).
+
+
+What do you think will happen if you strip out punctuations and/or numbers? What about converting upper case characters to lower case?
+
+I think that if we strip out punctuation and numbers the overall performance would increase, since they are used in a similar way in all languages, they don't quite help in defining certain languages. So if we remove eg. punctuation => "i, would" goes to "i would" and the encountered ngram "i wo" will be corectly found in the language, instead of looking for "i, w" which probably would appear far less. I would say this depends as well on the languages used, I am not familiar with any of them so my reasoning is with English or most European languages.
+
+If we convert upper case to lower case, I believe that performance would increase as well, since now when we have grams that start a sentence, (need to start with an upper case) they can be hashed to the same key in the ngram dictionary as the same ngram appearing somewhere in the middle of the sentence. So they would be contributing more realistically to the count.
+
+
+We use 4-gram models in this homework assignment. What do you think will happen if we varied the ngram size, such as using unigrams, bigrams and trigrams?
+
+I tried using lower level grams, it decreases the accuracy. This happens since we are not taking enough context! And it would be hard to differenciate different languages that have a similar distribution of letter frequencies. 
